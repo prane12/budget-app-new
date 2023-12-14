@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-app-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: budget-app-web
+  template:
+    metadata:
+      labels:
+        app: budget-app-web
+    spec:
+      containers:
+        - name: budget-app-web
+          image: krishnavamshi933/budget-app-web:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: "postgres-service"
+            - name: DB_USER
+              value: "Budgy"
+            - name: DB_PASSWORD
+              value: "Budgy"
+            - name: DB_NAME
+              value: "budgy_development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: budget-app-web-service
+spec:
+  selector:
+    app: budget-app-web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: budget-app-web-ingress
+spec:
+  rules:
+  - host: *  # Replace with your actual hostname
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: budget-app-web-service
+            port:
+              number: 80
