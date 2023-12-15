@@ -46,7 +46,7 @@ metadata:
   name: budget-app-web-ingress
 spec:
   rules:
-  - host: *  # Replace with your actual hostname
+  - host: 43.204.214.11 # Replace with your actual hostname
     http:
       paths:
       - pathType: Prefix
