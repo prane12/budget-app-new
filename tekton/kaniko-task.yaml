@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: kaniko-task
+spec:
+  steps:
+    - name: build-and-push
+      image: gcr.io/kaniko-project/executor:v1.6.0
+      workingDir: /workspace/source
+      env:
+        - name: DOCKER_CONFIG
+          value: /tekton/home/.docker
+      command:
+        - /kaniko/executor
+      args:
+        - --context
+        - $(inputs.params.CONTEXT)
+        - --dockerfile
+        - $(inputs.params.DOCKERFILE)
+        - --destination
+        - $(inputs.params.IMAGE)
