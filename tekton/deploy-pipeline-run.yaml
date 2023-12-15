@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: your-pipeline-run
+spec:
+  pipelineRef:
+    name: docker-build-and-push-pipeline
+  params:
+    - name: repo-url
+      value: 'https://github.com/krishnavamshi933/Budget-App.git'
+    - name: repo-revision
+      value: 'main'
+    - name: image-name
+      value: 'budget-app'
+    - name: docker-hub-username
+      value: 'krishnavamshi933'
