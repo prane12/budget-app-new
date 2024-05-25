@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budget-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budget-app
+  template:
+    metadata:
+      labels:
+        app: budget-app
+    spec:
+      containers:
+      - name: budget-app
+        image: prane12/budget-app-repo:latest # Assuming you've tagged your local image as budget-app_web:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: DB_NAME
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: DB_PORT
+      # Add additional containers if needed
+
