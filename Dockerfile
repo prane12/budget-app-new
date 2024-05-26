@@ -1,4 +1,4 @@
-FROM ruby:3.1.2
+FROM docker.io/library/ruby:3.1.2
 
 # Set the working directory in the container
 WORKDIR /app
