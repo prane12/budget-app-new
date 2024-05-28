@@ -6,7 +6,7 @@ metadata:
 data:
   # example of adding additional configuration
   repositories: |
-    - url: https://github.com/prane12/Budget-App.git 
+    - url: https://github.com/prane12/budget-app-new.git
       type: git
       passwordSecret:
         name: github-cred
