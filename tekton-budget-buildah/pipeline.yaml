@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: tutorial-pipeline
+spec:
+  workspaces:
+    - name: myworkspace
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: myworkspace
+      params:
+        - name: url
+          value: https://github.com/prane12/Budget-App.git
+        - name: deleteExisting
+          value: "true"
+    - name: build
+      taskRef:
+        name: buildah
+      runAfter:
+        - git-clone
+      params:
+        - name: IMAGE
+          value: docker.io/prane12/budget-app
+        - name: IMAGE_PUSH_SECRET_NAME
+          value: image-push-secrets
+      workspaces:
+        - name: source
+          workspace: myworkspace

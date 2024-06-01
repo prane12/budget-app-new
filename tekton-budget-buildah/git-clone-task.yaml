@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+spec:
+  params:
+    - name: url
+      description: URL of the Git repository to clone
+    - name: deleteExisting
+      description: Whether to delete existing contents of the workspace
+      default: "false"
+  workspaces:
+    - name: output
+  steps:
+    - name: git-clone
+      image: alpine/git
+      script: |
+        if [ "$(params.deleteExisting)" = "true" ]; then
+          rm -rf $(workspaces.output.path)/*
+        fi
+        git clone $(params.url) $(workspaces.output.path)
+    - name: list-files
+      image: busybox
+      script: |
+        echo "Listing files in the workspace:"
+        ls -al $(workspaces.output.path)
+
