@@ -19,8 +19,11 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_PORT=${DB_PORT}
       - DB_HOST=${DB_HOST}
+<<<<<<< HEAD
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rake db:migrate && bundle exec rails server -b 0.0.0.0"
 
+=======
+>>>>>>> e98b0c87f65beb818d2a71c6ea69c4b45aed3c14
   db:
     image: postgres:14.1
     volumes:

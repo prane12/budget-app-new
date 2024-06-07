@@ -18,3 +18,7 @@ test:
 production:
   <<: *default
   database: <%= ENV.fetch("DB_NAME_PRODUCTION", "production_database") %>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e98b0c87f65beb818d2a71c6ea69c4b45aed3c14

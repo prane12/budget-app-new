@@ -11,7 +11,11 @@ spec:
     path: app
   destination:
     server: 'https://kubernetes.default.svc'
+<<<<<<< HEAD
     namespace: argocd 
+=======
+    namespace: my-app-namespace
+>>>>>>> e98b0c87f65beb818d2a71c6ea69c4b45aed3c14
   syncPolicy:
     automated:
       prune: true
