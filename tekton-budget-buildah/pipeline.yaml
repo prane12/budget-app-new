@@ -14,7 +14,7 @@ spec:
           workspace: myworkspace
       params:
         - name: url
-          value: https://github.com/prane12/Budget-App.git
+          value: https://github.com/prane12/budget-app-new.git 
         - name: deleteExisting
           value: "true"
     - name: build
